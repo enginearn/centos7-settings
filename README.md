@@ -1,6 +1,6 @@
 # CentOS 7 Settings
 
-## Enviroment
+## Environment
 
 ||Version|
 |:--:|:--:|
@@ -33,6 +33,23 @@ $ localectl status
 
 [キーボードの種類](http://qa.elecom.co.jp/faq_detail.html?id=5262)
 
+## Rename Folder Names jp to en
+
+``` bash
+$ LANG=C xdg-user-dirs-gtk-update
+Gtk-Message: 17:59:42.048: GtkDialog mapped without a transient parent. This is discouraged.
+Moving DESKTOP directory from デスクトップ to Desktop
+Moving DOWNLOAD directory from ダウンロード to Downloads
+Moving TEMPLATES directory from テンプレート to Templates
+Moving PUBLICSHARE directory from 公開 to Public
+Moving DOCUMENTS directory from ドキュメント to Documents
+Moving MUSIC directory from 音楽 to Music
+Moving PICTURES directory from 画像 to Pictures
+Moving VIDEOS directory from ビデオ to Videos
+```
+
+![rename_folder_names](./md_images/rename_folder_names.png)
+
 ## Display Settings
 
 ディスプレイ解像度に`1920 x 1080`を追加
@@ -41,23 +58,23 @@ $ localectl status
 $ xrandr
 Screen 0: minimum 1 x 1, current 1680 x 1050, maximum 8192 x 8192
 Virtual1 connected primary 1680x1050+0+0 (normal left inverted right x axis y axis) 0mm x 0mm
-   1024x768      60.00 +  60.00  
-   2560x1600     59.99  
-   1920x1440     60.00  
-   1856x1392     60.00  
-   1792x1344     60.00  
-   1920x1200     59.88  
-   1600x1200     60.00  
-   1680x1050     59.95* 
-   1400x1050     59.98  
-   1280x1024     60.02  
-   1440x900      59.89  
-   1280x960      60.00  
-   1360x768      60.02  
-   1280x800      59.81  
-   1152x864      75.00  
-   1280x768      59.87  
-   800x600       60.32  
+   1024x768      60.00 +  60.00
+   2560x1600     59.99
+   1920x1440     60.00
+   1856x1392     60.00
+   1792x1344     60.00
+   1920x1200     59.88
+   1600x1200     60.00
+   1680x1050     59.95*
+   1400x1050     59.98
+   1280x1024     60.02
+   1440x900      59.89
+   1280x960      60.00
+   1360x768      60.02
+   1280x800      59.81
+   1152x864      75.00
+   1280x768      59.87
+   800x600       60.32
    640x480       59.94
 ```
 
@@ -107,7 +124,7 @@ $ sudo mount -t vboxsf centos7 /mnt
 ```
 
 ``` bash
-$ ll /sbin/mount.vboxsf 
+$ ll /sbin/mount.vboxsf
 lrwxrwxrwx. 1 root root 48  3月 18 15:05 /sbin/mount.vboxsf -> /opt/VBoxGuestAdditions-7.0.6/other/mount.vboxsf
 ```
 
@@ -179,46 +196,46 @@ Loading mirror speeds from cached hostfile
 インストール容量: 122 M
 Downloading packages:
 No Presto metadata available for updates
-(1/8): glibc-headers-2.17-326.el7_9.x86_64.rpm             | 691 kB   00:05     
-(2/8): glibc-devel-2.17-326.el7_9.x86_64.rpm               | 1.1 MB   00:05     
-(3/8): gcc-c++-4.8.5-44.el7.x86_64.rpm                     | 7.2 MB   00:13     
-(4/8): cpp-4.8.5-44.el7.x86_64.rpm                         | 5.9 MB   00:16     
-(5/8): libstdc++-devel-4.8.5-44.el7.x86_64.rpm             | 1.5 MB   00:09     
-(6/8): kernel-headers-3.10.0-1160.88.1.el7.x86_64.rpm      | 9.1 MB   00:20     
-(7/8): kernel-devel-3.10.0-1160.88.1.el7.x86_64.rpm        |  18 MB   00:24     
-(8/8): gcc-4.8.5-44.el7.x86_64.rpm                         |  16 MB   00:30     
+(1/8): glibc-headers-2.17-326.el7_9.x86_64.rpm             | 691 kB   00:05
+(2/8): glibc-devel-2.17-326.el7_9.x86_64.rpm               | 1.1 MB   00:05
+(3/8): gcc-c++-4.8.5-44.el7.x86_64.rpm                     | 7.2 MB   00:13
+(4/8): cpp-4.8.5-44.el7.x86_64.rpm                         | 5.9 MB   00:16
+(5/8): libstdc++-devel-4.8.5-44.el7.x86_64.rpm             | 1.5 MB   00:09
+(6/8): kernel-headers-3.10.0-1160.88.1.el7.x86_64.rpm      | 9.1 MB   00:20
+(7/8): kernel-devel-3.10.0-1160.88.1.el7.x86_64.rpm        |  18 MB   00:24
+(8/8): gcc-4.8.5-44.el7.x86_64.rpm                         |  16 MB   00:30
 --------------------------------------------------------------------------------
-合計                                               2.0 MB/s |  60 MB  00:30     
+合計                                               2.0 MB/s |  60 MB  00:30
 Running transaction check
 Running transaction test
 Transaction test succeeded
 Running transaction
-  インストール中          : kernel-headers-3.10.0-1160.88.1.el7.x86_64      1/8 
-  インストール中          : glibc-headers-2.17-326.el7_9.x86_64             2/8 
-  インストール中          : glibc-devel-2.17-326.el7_9.x86_64               3/8 
-  インストール中          : libstdc++-devel-4.8.5-44.el7.x86_64             4/8 
-  インストール中          : cpp-4.8.5-44.el7.x86_64                         5/8 
-  インストール中          : gcc-4.8.5-44.el7.x86_64                         6/8 
-  インストール中          : gcc-c++-4.8.5-44.el7.x86_64                     7/8 
-  インストール中          : kernel-devel-3.10.0-1160.88.1.el7.x86_64        8/8 
-  検証中                  : gcc-c++-4.8.5-44.el7.x86_64                     1/8 
-  検証中                  : glibc-devel-2.17-326.el7_9.x86_64               2/8 
-  検証中                  : cpp-4.8.5-44.el7.x86_64                         3/8 
-  検証中                  : glibc-headers-2.17-326.el7_9.x86_64             4/8 
-  検証中                  : gcc-4.8.5-44.el7.x86_64                         5/8 
-  検証中                  : kernel-devel-3.10.0-1160.88.1.el7.x86_64        6/8 
-  検証中                  : libstdc++-devel-4.8.5-44.el7.x86_64             7/8 
-  検証中                  : kernel-headers-3.10.0-1160.88.1.el7.x86_64      8/8 
+  インストール中          : kernel-headers-3.10.0-1160.88.1.el7.x86_64      1/8
+  インストール中          : glibc-headers-2.17-326.el7_9.x86_64             2/8
+  インストール中          : glibc-devel-2.17-326.el7_9.x86_64               3/8
+  インストール中          : libstdc++-devel-4.8.5-44.el7.x86_64             4/8
+  インストール中          : cpp-4.8.5-44.el7.x86_64                         5/8
+  インストール中          : gcc-4.8.5-44.el7.x86_64                         6/8
+  インストール中          : gcc-c++-4.8.5-44.el7.x86_64                     7/8
+  インストール中          : kernel-devel-3.10.0-1160.88.1.el7.x86_64        8/8
+  検証中                  : gcc-c++-4.8.5-44.el7.x86_64                     1/8
+  検証中                  : glibc-devel-2.17-326.el7_9.x86_64               2/8
+  検証中                  : cpp-4.8.5-44.el7.x86_64                         3/8
+  検証中                  : glibc-headers-2.17-326.el7_9.x86_64             4/8
+  検証中                  : gcc-4.8.5-44.el7.x86_64                         5/8
+  検証中                  : kernel-devel-3.10.0-1160.88.1.el7.x86_64        6/8
+  検証中                  : libstdc++-devel-4.8.5-44.el7.x86_64             7/8
+  検証中                  : kernel-headers-3.10.0-1160.88.1.el7.x86_64      8/8
 
 インストール:
-  gcc.x86_64 0:4.8.5-44.el7                                                     
-  gcc-c++.x86_64 0:4.8.5-44.el7                                                 
-  kernel-devel.x86_64 0:3.10.0-1160.88.1.el7                                    
-  kernel-headers.x86_64 0:3.10.0-1160.88.1.el7                                  
+  gcc.x86_64 0:4.8.5-44.el7
+  gcc-c++.x86_64 0:4.8.5-44.el7
+  kernel-devel.x86_64 0:3.10.0-1160.88.1.el7
+  kernel-headers.x86_64 0:3.10.0-1160.88.1.el7
 
 依存性関連をインストールしました:
-  cpp.x86_64 0:4.8.5-44.el7              glibc-devel.x86_64 0:2.17-326.el7_9   
-  glibc-headers.x86_64 0:2.17-326.el7_9  libstdc++-devel.x86_64 0:4.8.5-44.el7 
+  cpp.x86_64 0:4.8.5-44.el7              glibc-devel.x86_64 0:2.17-326.el7_9
+  glibc-headers.x86_64 0:2.17-326.el7_9  libstdc++-devel.x86_64 0:4.8.5-44.el7
 
 完了しました!
 ```
