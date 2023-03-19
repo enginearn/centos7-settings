@@ -50,6 +50,33 @@ Moving VIDEOS directory from ビデオ to Videos
 
 ![rename_folder_names](./md_images/rename_folder_names.png)
 
+``` bash
+$ cat .config/user-dirs.dirs
+# This file is written by xdg-user-dirs-update
+# If you want to change or add directories, just edit the line you're
+# interested in. All local changes will be retained on the next run
+# Format is XDG_xxx_DIR="$HOME/yyy", where yyy is a shell-escaped
+# homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
+# absolute path. No other format is supported.
+# 
+XDG_DESKTOP_DIR="$HOME/Desktop"
+XDG_DOWNLOAD_DIR="$HOME/Downloads"
+XDG_TEMPLATES_DIR="$HOME/Templates"
+XDG_PUBLICSHARE_DIR="$HOME/Public"
+XDG_DOCUMENTS_DIR="$HOME/Documents"
+XDG_MUSIC_DIR="$HOME/Music"
+XDG_PICTURES_DIR="$HOME/Pictures"
+XDG_VIDEOS_DIR="$HOME/Videos"
+```
+
+``` bash
+$ cat .config/user-dirs.locale 
+ja_JP
+$ vim .config/user-dirs.locale
+$ cat .config/user-dirs.locale 
+en_US
+```
+
 ## Display Settings
 
 ディスプレイ解像度に`1920 x 1080`を追加
@@ -252,5 +279,9 @@ $ sudo chmod 700 /mnt
 ```
 
 [VirtualBox Guest Additions エラー対処法 （CentOS）](https://engineer-log.net/index.php/2016/06/06/post-281/)
+
+[VirtualBoxの共有フォルダのマウントに失敗する](https://qiita.com/amagitakayosi/items/07ff50afac1cd6f62c1f)
+
+[VirtualBoxでフォルダーをマウントし共有する方法](https://legendimposter.hatenablog.jp/entry/2020/08/26/170022)
 
 [Linux ディレクトリのパーミッション（アクセス権）について](https://turningp.jp/server-client/linux/directory-permission)
