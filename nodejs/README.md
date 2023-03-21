@@ -577,12 +577,6 @@ Loading mirror speeds from cached hostfile
 
 [nodesource / distributions](https://github.com/nodesource/distributions)
 
-[Welcome to CentOS](file:////usr/share/doc/HTML/index.html)
-
-[Apache HTTP Server Test Page powered by CentOS](http://localhost/)
-
-[Welcome to nginx!](http://localhost:49152/)
-
 [CentOSにNode.jsをインストール | キャンパーSEの備忘録](https://shoboon.net/?p=749)
 
 [GitHub - nodesource/distributions: NodeSource Node.js Binary Distributions](https://github.com/nodesource/distributions#rpm)
@@ -593,8 +587,7 @@ Loading mirror speeds from cached hostfile
 
 [Index of /software/gcc/releases/](http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/)
 
-[gccのバージョンアップグレード（CentOS7） | Node4u ノードフォーユー：100Mbps,1Gbps,10Gbps高帯域保証レンタルサーバー](https://node4u.info/2021/08/11/
-gcc%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89%EF%BC%88centos7%EF%BC%89/)
+[kernelとgccのアップデート　CentOS7](https://node4u.info/2022/07/03/kernel%e3%81%a8gcc%e3%81%ae%e3%82%a2%e3%83%83%e3%83%97%e3%83%87%e3%83%bc%e3%83%88%e3%80%80centos7/)
 
 [yum groupinstall "Development tools" で入るパッケージ一覧（CentOS） - Qiita](https://qiita.com/old_/items/6f9da09b9af795c11b71)
 
@@ -651,5 +644,3 @@ gcc%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%83%E3%8
 [CentOS7.9にMySQL8を入れる - Qiita](https://qiita.com/gunkan8mmt/items/d9b90c2114e738b31474)
 
 [yum install と localinstallの違い - Qiita](https://qiita.com/mashiro_lain/items/c37ab3e33e244784bd2f)
-
-[Copy All Tab Urls – 🦊 Firefox (ja) 向け拡張機能を入手](https://addons.mozilla.org/ja/firefox/addon/copy-all-tab-urls-we/)
