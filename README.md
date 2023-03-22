@@ -285,3 +285,129 @@ $ sudo chmod 700 /mnt
 [VirtualBoxでフォルダーをマウントし共有する方法](https://legendimposter.hatenablog.jp/entry/2020/08/26/170022)
 
 [Linux ディレクトリのパーミッション（アクセス権）について](https://turningp.jp/server-client/linux/directory-permission)
+
+## upgrade gcc
+
+``` bash
+$ gcc --version
+gcc バージョン 4.8.5
+```
+
+``` bash
+$ sudo yum install gcc-c++
+$ cd /usr/local/src
+```
+
+``` bash
+$ sudo curl -O http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-12.2.0/gcc-12.2.0.tar.gz
+$ sudo tar -xvzf gcc-12.2.0.tar.gz
+$ cd /usr/local/src/gcc-12.2.0/
+$ sudo ./contrib/download_prerequisites
+$ sudo mkdir build
+$ cd build
+```
+
+``` bash
+$ sudo ../configure --enable-languages=c,c++ --prefix=/usr/local --disable-bootstrap --disable-multilib../configure --enable-languages=c,c++ --prefix=/usr/local --disable-bootstrap --disable-multilib
+$ sudo make
+$ sudo make install
+$ /usr/local/bin/gcc --version
+```
+
+``` bash
+$ sudo vim /etc/ld.so.conf
+# Add
+/usr/local/lib64
+$ sudo ldconfig -v
+```
+
+``` bash
+$ cd /etc/ld.so.conf.d
+$ sudo vim usr-local-lib64.conf
+# Add
+/usr/local/lib64
+```
+
+``` bash
+$ sudo ldconfig -v
+```
+
+``` bash
+$ cd ~
+$ gcc --version
+gcc (GCC) 12.2.0
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+$ sudo reboot
+```
+
+## upgrade kernel
+
+``` bash
+$ cd /usr/local/src
+$ sudo curl -O https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.19.9.tar.xz
+$ sudo xz -d linux-5.19.9.tar.xz
+$ sudo tar xvf linux-5.19.9.tar
+$ cd linux-5.19.9/
+```
+
+``` bash
+$ ls /boot/
+System.map-3.10.0-1160.88.1.el7.x86_64
+System.map-3.10.0-1160.el7.x86_64
+config-3.10.0-1160.88.1.el7.x86_64
+config-3.10.0-1160.el7.x86_64
+efi
+grub
+grub2
+initramfs-0-rescue-3373971e1f8bfa4b82eea8d99a71461d.img
+initramfs-3.10.0-1160.88.1.el7.x86_64.img
+initramfs-3.10.0-1160.88.1.el7.x86_64kdump.img
+initramfs-3.10.0-1160.el7.x86_64.img
+initramfs-3.10.0-1160.el7.x86_64kdump.img
+symvers-3.10.0-1160.88.1.el7.x86_64.gz
+symvers-3.10.0-1160.el7.x86_64.gz
+vmlinuz-0-rescue-3373971e1f8bfa4b82eea8d99a71461d
+vmlinuz-3.10.0-1160.88.1.el7.x86_64
+vmlinuz-3.10.0-1160.el7.x86_64
+```
+
+``` bash
+$ sudo cp -p /boot/config-3.10.0-1160.el7.x86_64 ./.config
+OR
+$ sudo cp -p /boot/config-3.10.0-1160.88.1.el7.x86_64 ./.config
+[sudo] centos7 のパスワード:$ sudo cp -p /boot/config-3.10.0-1160.el7.x86_64 ./.config
+[sudo] centos7 のパスワード:
+```
+
+``` bash
+$ cd /usr/local/src/linux-5.19.9/
+
+```
+
+[shell - Bash weirdness when printing ${IFS@Q} - Stack Overflow](https://stackoverflow.com/questions/46019083/bash-weirdness-when-printing-ifsq)
+
+[How to Update Bash on CentOS 6 and CentOS 7 - Liquid Web](https://www.liquidweb.com/kb/how-to-update-bash-on-centos-6-and-centos-7/)
+
+[yum clean コマンドでキャッシュ削除・アップデートのチェックと実行 〜 CentOS6 | EasyRamble](https://easyramble.com/yum-clean-and-update.html)
+
+[Linuxのカーネルバージョンを確認する](https://www.linuxmaster.jp/linux_skill/2018/01/post-175.html)
+
+[kernelとgccのアップデート CentOS7 | Node4u ノードフォーユー：100Mbps,1Gbps,10Gbps高帯域保証レンタルサーバー](https://node4u.info/2022/07/03/kernel%e3%81%a8gcc%e3%81%ae%e3%82%a2%e3%83%83%e3%83%97%e3%83%87%e3%83%bc%e3%83%88%e3%80%80centos7/)
+
+[centos7のkernelアップデート - Qiita](https://qiita.com/29_nickey/items/c87347fd0c851e3a0877)
+
+[Index of /software/gcc/releases/gcc-12.2.0/](http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-12.2.0/)
+
+[Index of /pub/linux/kernel/v5.x/](https://cdn.kernel.org/pub/linux/kernel/v5.x/)
+
+[linux-5.17 の CentOS Linux release 7.3 へのインストール｜May｜note](https://note.com/yamblue/n/nefc0f9795966)
+
+[CentOS 7.3にGCC 11をインストール (SCL)｜May｜note](https://note.com/yamblue/n/nee1d2f34286a)
+
+[「/bin」「/usr/bin」「/usr/local/bin」ディレクトリの使い分け - Linux技術者認定 LinuC | LPI-Japan](https://linuc.org/study/knowledge/544/)
+
+[gccの-rdynamic option 調査メモ - Qiita](https://qiita.com/takeoverjp/items/14fdf7ab0d0a76d83d30)
+
+[Index of /gnu/bash](https://ftp.gnu.org/gnu/bash/)
