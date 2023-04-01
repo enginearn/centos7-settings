@@ -345,46 +345,182 @@ $ sudo reboot
 ## upgrade kernel
 
 ``` bash
-$ cd /usr/local/src
-$ sudo curl -O https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.19.9.tar.xz
-$ sudo xz -d linux-5.19.9.tar.xz
-$ sudo tar xvf linux-5.19.9.tar
-$ cd linux-5.19.9/
+# rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+# rpm -Uvh https://elrepo.org/linux/kernel/el7/x86_64/RPMS/elrepo-release-7.0-6.el7.elrepo.noarch.rpm
 ```
 
 ``` bash
-$ ls /boot/
-System.map-3.10.0-1160.88.1.el7.x86_64
-System.map-3.10.0-1160.el7.x86_64
-config-3.10.0-1160.88.1.el7.x86_64
-config-3.10.0-1160.el7.x86_64
-efi
-grub
-grub2
-initramfs-0-rescue-3373971e1f8bfa4b82eea8d99a71461d.img
-initramfs-3.10.0-1160.88.1.el7.x86_64.img
-initramfs-3.10.0-1160.88.1.el7.x86_64kdump.img
-initramfs-3.10.0-1160.el7.x86_64.img
-initramfs-3.10.0-1160.el7.x86_64kdump.img
-symvers-3.10.0-1160.88.1.el7.x86_64.gz
-symvers-3.10.0-1160.el7.x86_64.gz
-vmlinuz-0-rescue-3373971e1f8bfa4b82eea8d99a71461d
-vmlinuz-3.10.0-1160.88.1.el7.x86_64
-vmlinuz-3.10.0-1160.el7.x86_64
+# yum --enablerepo=elrepo-kernel install kernel-lt
 ```
 
 ``` bash
-$ sudo cp -p /boot/config-3.10.0-1160.el7.x86_64 ./.config
-OR
-$ sudo cp -p /boot/config-3.10.0-1160.88.1.el7.x86_64 ./.config
-[sudo] centos7 のパスワード:$ sudo cp -p /boot/config-3.10.0-1160.el7.x86_64 ./.config
+# grub2-set-default 0
+# grub2-editenv list
+saved_entry=0
+```
+
+``` bash
+# yum --enablerepo=elrepo-kernel swap kernel-tools-libs kernel-lt-tools-libs
+# yum --enablerepo=elrepo-kernel install kernel-lt-tools
+```
+
+``` bash
+# reboot
+```
+
+## Install kernel-devel
+
+``` bash
+$ uname -a
+inux centos7 5.4.237-1.el7.elrepo.x86_64 #1 SMP Thu Mar 16 13:31:19 EDT 2023 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+``` bash
+$ uname -r
+5.4.237-1.el7.elrepo.x86_64
+$ rpm -qa | grep kernel-devel
+kernel-devel-3.10.0-1160.88.1.el7.x86_64
+```
+
+``` bash
+$ ls -l /lib/modules/
+合計 12
+drwxr-xr-x. 7 root root 4096  3月 23 21:04 3.10.0-1160.88.1.el7.x86_64
+drwxr-xr-x. 7 root root 4096  3月 16 00:33 3.10.0-1160.el7.x86_64
+drwxr-xr-x. 7 root root 4096  3月 24 21:35 5.4.237-1.el7.elrepo.x86_64
+```
+
+``` bash
+$ ls -l /lib/modules/5.4.237-1.el7.elrepo.x86_64/build
+lrwxrwxrwx. 1 root root 44  3月 22 18:17 /lib/modules/5.4.237-1.el7.elrepo.x86_64/build -> /usr/src/kernels/5.4.237-1.el7.elrepo.x86_64
+```
+
+``` bash 
+# 誤ったバージョンを変数に格納
+KERNEL_DEVEL_WRONG_VERSION=`rpm -qa | grep kernel-devel`
+echo ${KERNEL_DEVEL_WRONG_VERSION}
+```
+
+``` bash
+# rpmコマンドで削除
+$ sudo rpm -e --nodeps ${KERNEL_DEVEL_WRONG_VERSION}
 [sudo] centos7 のパスワード:
 ```
 
-``` bash
-$ cd /usr/local/src/linux-5.19.9/
+> Install
+> rpm -ivh パッケージファイル名
+>
+> Update
+> rpm -Uvh パッケージファイル名
+>
+> Remove
+> rpm -evh パッケージ名
 
+``` bash
+$rpm -qa | grep kernel-devel
+$ # removed so nothing return
+$ ls -l /usr/src/kernels/
+合計 0
 ```
+
+``` bahs
+$ KERNEL_VERSION=`uname -r`
+$ KERNEL_DEVEL_EXPECTED_VERSION=kernel-devel-${KERNEL_VERSION}
+$ echo ${KERNEL_DEVEL_EXPECTED_VERSION}
+kernel-devel-5.4.237-1.el7.elrepo.x86_64
+```
+
+``` bash
+$ cd /usr/local/src
+$ sudo wget http://ftp.yz.yamagata-u.ac.jp/pub/linux/RPMS/elrepo/kernel/el7/x86_64/RPMS/kernel-lt-devel-5.4.237-1.el7.elrepo.x86_64.rpm
+[sudo] centos7 のパスワード:
+--2023-03-24 22:07:49--  http://ftp.yz.yamagata-u.ac.jp/pub/linux/RPMS/elrepo/kernel/el7/x86_64/RPMS/kernel-lt-devel-5.4.237-1.el7.elrepo.x86_64.rpm
+ftp.yz.yamagata-u.ac.jp (ftp.yz.yamagata-u.ac.jp) をDNSに問いあわせています... 133.24.248.18, 133.24.248.19, 133.24.248.16, ...
+ftp.yz.yamagata-u.ac.jp (ftp.yz.yamagata-u.ac.jp)|133.24.248.18|:80 に接続しています... 接続しました。
+HTTP による接続要求を送信しました、応答を待っています... 200 OK
+長さ: 13542340 (13M) [application/octet-stream]
+`kernel-lt-devel-5.4.237-1.el7.elrepo.x86_64.rpm' に保存中
+
+100%[======================================>] 13,542,340  4.44MB/s 時間 2.9s   
+
+2023-03-24 22:07:52 (4.44 MB/s) - `kernel-lt-devel-5.4.237-1.el7.elrepo.x86_64.rpm' へ保存完了 [13542340/13542340]
+```
+
+``` bash
+$ sudo rpm -ivg kernel-lt-devel-5.4.237-1.el7.elrepo.x86_64.rpm 
+パッケージの準備中...
+kernel-lt-devel-5.4.237-1.el7.elrepo.x86_64
+```
+
+``` bash
+$ ls -l /usr/src/kernels/
+合計 4
+drwxr-xr-x. 22 root root 4096  3月 24 22:10 5.4.237-1.el7.elrepo.x86_64
+```
+
+``` bash
+$ ls -l /lib/modules/${KERNEL_VERSION}/build/
+合計 5512
+-rw-r--r--.   1 root root     595  3月 17 02:57 Kconfig
+-rw-r--r--.   1 root root   62332  3月 17 02:57 Makefile
+-rw-r--r--.   1 root root 1421833  3月 17 02:57 Module.symvers
+-rw-r--r--.   1 root root 4094186  3月 17 02:57 System.map
+drwxr-xr-x.  27 root root    4096  3月 24 22:09 arch
+drwxr-xr-x.   3 root root      78  3月 24 22:09 block
+drwxr-xr-x.   2 root root      37  3月 24 22:09 certs
+drwxr-xr-x.   4 root root      76  3月 24 22:09 crypto
+drwxr-xr-x. 137 root root    4096  3月 24 22:09 drivers
+drwxr-xr-x.  76 root root    4096  3月 24 22:09 fs
+drwxr-xr-x.  29 root root    4096  3月 24 22:10 include
+drwxr-xr-x.   2 root root      37  3月 24 22:10 init
+drwxr-xr-x.   2 root root      22  3月 24 22:10 ipc
+drwxr-xr-x.  17 root root    4096  3月 24 22:10 kernel
+drwxr-xr-x.  18 root root    4096  3月 24 22:10 lib
+drwxr-xr-x.   3 root root      71  3月 24 22:10 mm
+drwxr-xr-x.  70 root root    4096  3月 24 22:10 net
+drwxr-xr-x.  28 root root    4096  3月 24 22:10 samples
+drwxr-xr-x.  15 root root    8192  3月 24 22:10 scripts
+drwxr-xr-x.  12 root root     209  3月 24 22:10 security
+drwxr-xr-x.  26 root root    4096  3月 24 22:10 sound
+drwxr-xr-x.  30 root root    4096  3月 24 22:10 tools
+drwxr-xr-x.   3 root root      52  3月 24 22:10 usr
+drwxr-xr-x.   4 root root      44  3月 24 22:10 virt
+```
+
+``` bash
+$ sudo reboot
+```
+
+[CentOS 7 Kernel を 5.4系(kernel-lt)に変更する](https://kuni92.net/2022/01/centos-7-kernel.html)
+
+[Install Linux kernel-develInstall Linux kernel-devel](https://qiita.com/metheglin/items/60261f474ccdfb467574)
+
+## cron
+
+``` bash
+$ sudo systemctl start crond.service
+```
+
+``` bash
+$ sudo systemctl enable crond.service
+```
+
+``` bash
+$ sudo systemctl status crond.service
+● crond.service - Command Scheduler
+   Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
+   Active: active (running) since 金 2023-03-24 20:57:39 JST; 24min ago
+ Main PID: 1313 (crond)
+   CGroup: /system.slice/crond.service
+           └─1313 /usr/sbin/crond -n
+
+ 3月 24 20:57:39 centos7 systemd[1]: Started Command Scheduler.
+ 3月 24 20:57:39 centos7 crond[1313]: (CRON) INFO (RANDOM_DELAY will be sc....)
+ 3月 24 20:57:40 centos7 crond[1313]: (CRON) INFO (running with inotify su...t)
+Hint: Some lines were ellipsized, use -l to show in full.
+```
+
+## Refs
 
 [shell - Bash weirdness when printing ${IFS@Q} - Stack Overflow](https://stackoverflow.com/questions/46019083/bash-weirdness-when-printing-ifsq)
 
@@ -411,3 +547,5 @@ $ cd /usr/local/src/linux-5.19.9/
 [gccの-rdynamic option 調査メモ - Qiita](https://qiita.com/takeoverjp/items/14fdf7ab0d0a76d83d30)
 
 [Index of /gnu/bash](https://ftp.gnu.org/gnu/bash/)
+
+[【 rpm 】コマンド（基礎編）――RPMパッケージをインストールする／アンインストールする](https://atmarkit.itmedia.co.jp/ait/articles/1609/13/news024.html)
